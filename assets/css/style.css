@@ -187,10 +187,6 @@ body {
     color: var(--color-pink);
 }
 
-.active {
-    fill: #2BF5AF !important;
-}
-
 .btn-chance {
     width: fit-content;
     display: flex;
@@ -229,4 +225,30 @@ body {
 
 .btn-chance span {
     height: 11px;
+}
+
+/* footer */
+.main-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    margin-top: 56px;
+    margin-bottom: 80px;
+}
+
+.footer-text {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.footer-text p {
+    height: 20px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 32px;
+    align-items: center;
 }
