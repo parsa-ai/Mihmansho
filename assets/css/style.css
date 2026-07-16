@@ -287,16 +287,16 @@ body {
 }
 
 .spin-action {
-    
+
     width: 120;
     height: 120;
     border-radius: 320px;
     padding: 24px;
-    
+
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     box-shadow: 0px 4px 24px 0px #B337AA33;
     border-top: 2px solid #B337AA;
     background: radial-gradient(78.14% 100% at 51.21% -0.03%, #B337AA 0%, #4D1849 100%);
@@ -361,6 +361,19 @@ body {
 
 #main-wheel-circle {
     transform: translateY(290px) rotateZ(0deg);
+}
+
+#spin-button {
+    transition: opacity .25s, transform .25s, filter .25s;
+}
+
+#spin-button.is-spinning,
+#spin-button:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(1);
+    transform: scale(.97);
 }
 
 .wheel-circle {
