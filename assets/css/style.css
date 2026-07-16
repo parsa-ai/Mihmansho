@@ -262,6 +262,8 @@ body {
     padding: 24px;
     background: radial-gradient(78.14% 100% at 51.21% -0.03%, #B337AA 0%, #4D1849 100%);
     border-top: 2px solid #B337AA;
+    box-shadow: 0px 4px 24px 0px #B337AA33;
+
     color: var(--color-forground);
     font-weight: 700;
     font-size: 20px;
@@ -285,16 +287,17 @@ body {
 }
 
 .spin-action {
-
+    
     width: 120;
     height: 120;
     border-radius: 320px;
     padding: 24px;
-
+    
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
+    box-shadow: 0px 4px 24px 0px #B337AA33;
     border-top: 2px solid #B337AA;
     background: radial-gradient(78.14% 100% at 51.21% -0.03%, #B337AA 0%, #4D1849 100%);
 
