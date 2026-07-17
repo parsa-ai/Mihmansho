@@ -81,12 +81,10 @@ function clickOnSpinButton() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // انتخاب همه ناوها (دسکتاپ + موبایل)
     const allNavItems = document.querySelectorAll('.main-nav .nav-item, .mobile-nav .nav-item');
 
-    // گروه‌بندی سکشن‌ها بر اساس href
-    const sectionsMap = new Map(); // href -> section element
-    const hrefToNavItems = new Map(); // href -> [navItem, navItem, ...]
+    const sectionsMap = new Map();
+    const hrefToNavItems = new Map();
 
     allNavItems.forEach(item => {
         const href = item.getAttribute('href');
@@ -105,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const items = hrefToNavItems.get(activeHref) || [];
         items.forEach(item => item.classList.add('active'));
 
-        // اگه لینک "خانه" (بدون هش واقعی) بود جدا مدیریت کن
         if (!activeHref) {
             document.querySelectorAll('.main-nav .nav-item:first-child, .mobile-nav .nav-item:first-child')
                 .forEach(item => item.classList.add('active'));
@@ -129,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', () => {
         if (window.scrollY < 50) {
-            setActive(null); // فعال کردن آیتم اول (میهمان شو)
+            setActive(null);
         }
     });
 
@@ -143,3 +140,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.querySelectorAll('.btn-copy').forEach(button => {
+    button.addEventListener('click', async () => {
+        const wrapper = button.closest('.share-link-wrapper');
+        const linkText = wrapper.querySelector('.link-text').textContent.trim();
+
+        try {
+            await navigator.clipboard.writeText(linkText);
+            showCopyFeedback(button);
+        } catch (err) {
+            fallbackCopy(linkText);
+            showCopyFeedback(button);
+        }
+    });
+});
+
+function fallbackCopy(text) {
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+}
+
+function showCopyFeedback(button) {
+    const span = button.querySelector('span');
+    const originalText = span.textContent;
+    span.textContent = 'کپی شد ✓';
+    button.disabled = true;
+
+    setTimeout(() => {
+        span.textContent = originalText;
+        button.disabled = false;
+    }, 1500);
+}
