@@ -98,9 +98,7 @@ button {
     --color-red: #FF4D4D;
     --color-green: #2BF5AF;
 }
-
-html,
-body {
+main {
     overflow-x: hidden;
 
 }
@@ -185,11 +183,12 @@ body {
 
 .mobile-nav a.nav-item {
     flex: 1;
-    font-size: 13px;
+    font-size: 11px;
     height: auto;
     padding: 4px 8px;
     flex-direction: column;
-}
+gap: 4px;
+    }
 
 
 .nav-item {
@@ -210,7 +209,7 @@ body {
 }
 
 .nav-item span {
-    height: 11px;
+    height: 16px;
 }
 
 .nav-item.active {
