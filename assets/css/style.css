@@ -1,5 +1,4 @@
 /* reset styles */
-
 *,
 *::before,
 *::after {
@@ -24,7 +23,6 @@
 html {
     scroll-behavior: smooth;
 }
-
 
 body {
     min-height: 100vh;
@@ -89,9 +87,7 @@ button {
 }
 
 /* main styles */
-
 :root {
-
     /* colors */
     --color-background: #10062D;
     --color-background-dark: #0E052A;
@@ -159,6 +155,36 @@ body {
     justify-content: flex-start;
     gap: 1.5rem;
 }
+
+
+.mobile-header {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    height: 80px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    z-index: 99999;
+    background-color: #10062D;
+}
+
+.mobile-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
+}
+
+.mobile-nav a.nav-item {
+    flex: 1;
+    font-size: 13px;
+    height: auto;
+    padding: 4px 8px;
+    flex-direction: column;
+}
+
 
 .nav-item {
     width: fit-content;
@@ -235,7 +261,6 @@ body {
     gap: 56px;
 }
 
-
 .hero-container {
     display: flex;
 }
@@ -258,20 +283,16 @@ body {
     padding-top: 145px;
     margin-bottom: -400px;
     height: 1039px;
-
     background:
         radial-gradient(circle at top,
             transparent 0%,
             var(--color-background) 70%),
         linear-gradient(#100642ea 1px, transparent 1px),
         linear-gradient(90deg, #100642ea 1px, transparent 1px);
-
     background-size:
         cover,
         120px 80px,
         120px 80px;
-
-
 }
 
 .title-box {
@@ -350,7 +371,6 @@ body {
 }
 
 .phone-input-input {
-
     border: 0;
     outline: 0;
     flex: 1;
@@ -375,18 +395,17 @@ body {
     background: radial-gradient(78.14% 100% at 51.21% -0.03%, #B337AA 0%, #4D1849 100%);
     border-top: 2px solid #B337AA;
     box-shadow: 0px 4px 24px 0px #B337AA33;
-
     font-weight: 700;
     font-size: 20px;
     line-height: 20px;
     letter-spacing: 0%;
     text-align: center;
     vertical-align: middle;
-
 }
 
 /* wheel */
 .wheel {
+    pointer-events: none;
     height: 638px;
     margin-bottom: -56px;
     position: relative;
@@ -396,6 +415,7 @@ body {
 }
 
 .action-box {
+    pointer-events: all;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -413,7 +433,6 @@ body {
     background: radial-gradient(78.14% 100% at 51.21% -0.03%, #B337AA 0%, #4D1849 100%);
     border-top: 2px solid #B337AA;
     box-shadow: 0px 4px 24px 0px #B337AA33;
-
     color: var(--color-forground);
     font-weight: 700;
     font-size: 20px;
@@ -427,7 +446,6 @@ body {
     position: absolute;
     top: -84px;
     z-index: 100;
-
     width: 168;
     height: 168;
     border-radius: 320px;
@@ -437,20 +455,16 @@ body {
 }
 
 .spin-action {
-
     width: 120;
     height: 120;
     border-radius: 320px;
     padding: 24px;
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     box-shadow: 0px 4px 24px 0px #B337AA33;
     border-top: 2px solid #B337AA;
     background: radial-gradient(78.14% 100% at 51.21% -0.03%, #B337AA 0%, #4D1849 100%);
-
     color: var(--color-forground);
     font-weight: 700;
     font-size: 20px;
@@ -460,12 +474,10 @@ body {
     vertical-align: middle;
 }
 
-
 .wheel-container {
     height: 100%;
     position: relative;
     overflow: hidden;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -550,7 +562,6 @@ body {
     z-index: 1;
 }
 
-
 .wheel-slice {
     position: absolute;
     top: 0;
@@ -621,7 +632,6 @@ body {
     text-align: center;
     color: var(--color-orange);
 }
-
 
 /* referral */
 .referral {
@@ -889,7 +899,6 @@ body {
     position: relative;
 }
 
-
 .image-placeholder img {
     height: 200px;
     width: 100%;
@@ -923,7 +932,6 @@ body {
 .rank-badge svg {
     position: absolute;
     z-index: 1;
-
 }
 
 .rank-badge span {
@@ -948,7 +956,6 @@ body {
 .stars {
     display: flex;
     /* gap: 24px; */
-
 }
 
 /* other */
@@ -983,7 +990,6 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-
     font-weight: 700;
     font-size: 20px;
     line-height: 20px;
