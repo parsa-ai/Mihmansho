@@ -276,6 +276,10 @@ body {
 }
 
 /* hero */
+.hero-photo img{
+    mix-blend-mode: lighten;
+  scale: 1.3;
+}
 .et {
     position: absolute;
     top: -90px;
