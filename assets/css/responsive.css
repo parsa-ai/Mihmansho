@@ -12,6 +12,15 @@
         display: none;
     }
 
+    .mobile-header {
+        display: flex;
+    }
+
+    .main-nav {
+        display: none;
+    }
+
+
     .prizes-grid {
         flex-wrap: wrap;
         height: auto;
@@ -37,10 +46,6 @@
         height: 4.5rem;
     }
 
-    .mobile-header {
-        display: flex;
-
-    }
 
     .logo-area {
         margin-right: -42px;
@@ -48,10 +53,6 @@
 
     .header-right {
         gap: 1rem;
-    }
-
-    .main-nav {
-        display: none;
     }
 
     .btn-chance {

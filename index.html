@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="./assets/css/style.css">
         <link rel="stylesheet" href="./assets/css/font.css">
         <link rel="stylesheet" href="./assets/css/responsive.css">
-        <link rel="stylesheet" href="./assets/js/main.js">
+        <link rel="stylesheet" href="./assets/css/otp.css">
     </head>
     <body id="landing-page">
 
@@ -139,23 +139,28 @@
                         <p class="hero-note">برای شروع کافیه شماره موبایل خود را
                             ثبت کنید:</p>
 
-                        <div class="auth-box">
-                            <label
-                                for="phone"
-                                class="phone-input">
-                                <svg width="32" height="32">
-                                    <use
-                                        href="./assets/icons/smartPhone.svg"></use>
+                        <form class="auth-box" id="authForm">
+                            <label for="phone" class="phone-input">
+                                <svg width="32" height="32" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor"
+                                    stroke-width="1.7">
+                                    <rect x="6" y="2" width="12" height="20"
+                                        rx="2.5" />
+                                    <line x1="10.5" y1="18.3" x2="13.5"
+                                        y2="18.3" />
                                 </svg>
                                 <input
                                     class="phone-input-input"
                                     id="phone"
                                     name="phone"
                                     type="text"
-                                    placeholder="شماره موبایل خود را وارد کنید">
+                                    inputmode="numeric"
+                                    placeholder="مثال : 09123456789"
+                                    value="">
                             </label>
-                            <button class="btn-submit">ثبت نام</button>
-                        </div>
+                            <button class="btn-submit" type="submit">ثبت
+                                نام</button>
+                        </form>
                         <!-- login -->
                         <!-- <button class="btn-submit">
                             <svg width="24" height="24">
@@ -350,7 +355,7 @@
                 </div>
                 <div class="action-box">
                     <!-- backend: after login change button -->
-                    <button class="login-action">ثبت نام سریع</button>
+                    <a href="#" class="login-action">ثبت نام سریع</a>
                     <!-- <button class="spin-wapper" id="spin-button"
                         onclick="clickOnSpinButton()">
                         <div class="spin-action"> بچرخون</div>
@@ -694,6 +699,57 @@
                 <a href="#">میهمان شو</a>
             </div>
         </footer>
+        <!-- OTP Modal / Drawer -->
+        <div class="overlay" id="otpOverlay">
+            <div class="otp-modal" role="dialog" aria-modal="true"
+                aria-labelledby="otpTitle">
+                <button class="otp-close" id="otpClose" type="button"
+                    aria-label="بستن">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#241250"
+                        stroke-width="2.4" stroke-linecap="round">
+                        <line x1="5" y1="5" x2="19" y2="19" />
+                        <line x1="19" y1="5" x2="5" y2="19" />
+                    </svg>
+                </button>
+
+                <h2 class="otp-title" id="otpTitle">تایید شماره موبایل</h2>
+                <p class="otp-desc">لطفا کد ارسال شده به شماره موبایل <b
+                        id="otpPhone">09360212700</b> را وارد کنید.</p>
+
+                <div class="otp-fields" id="otpFields">
+                    <input maxlength="1" inputmode="numeric"
+                        autocomplete="one-time-code" aria-label="رقم ۱">
+                    <input maxlength="1" inputmode="numeric" aria-label="رقم ۲">
+                    <input maxlength="1" inputmode="numeric" aria-label="رقم ۳">
+                    <input maxlength="1" inputmode="numeric" aria-label="رقم ۴">
+                    <input maxlength="1" inputmode="numeric" aria-label="رقم ۵">
+                </div>
+
+                <div class="otp-meta">
+                    <button class="otp-edit" type="button" id="otpEdit">
+                        <svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 20h9" />
+                            <path
+                                d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                        </svg>
+                        ویرایش شماره
+                    </button>
+                    <div class="otp-resend">
+                        <button class="otp-resend-btn" id="otpResend"
+                            type="button" disabled>تا ارسال مجدد</button>
+                        <span class="otp-divider"></span>
+                        <span class="otp-timer" id="otpTimer">01:30</span>
+                    </div>
+                </div>
+
+                <button class="otp-submit" id="otpSubmit" type="button"
+                    disabled>تایید و ثبت‌نام</button>
+                <p class="otp-status" id="otpStatus"></p>
+            </div>
+        </div>
     </body>
     <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/otp.js"></script>
 </html>
