@@ -47,9 +47,6 @@
     }
 
 
-    .logo-area {
-        margin-right: -42px;
-    }
 
     .header-right {
         gap: 1rem;
@@ -72,9 +69,10 @@
     }
 
     /* hero */
-    .et {
+    /* .et {
         display: none;
-    }
+    } */
+     
 
 
     .hero {

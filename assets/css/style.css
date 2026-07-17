@@ -99,6 +99,12 @@ button {
     --color-green: #2BF5AF;
 }
 
+html,
+body {
+    overflow-x: hidden;
+
+}
+
 body {
     background-color: var(--color-background, #10062D);
     color: var(--color-forground, #ffffff);
@@ -417,8 +423,9 @@ body {
     justify-content: center;
     gap: 8px;
 }
-.btn-submit span{
-height: 16px;
+
+.btn-submit span {
+    height: 16px;
 }
 
 /* wheel */
