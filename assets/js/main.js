@@ -43,11 +43,8 @@ function openWinTab() {
     const termsSubEl = document.getElementById('termsSubtitle');
     const termsListEl = document.getElementById('termsList');
     const termsSubmit = document.getElementById('termsSubmit');
-    const termsBtn1 =  document.getElementById('rulesBtn1');
-    const termsBtn2 =  document.getElementById('rulesBtn2');
-
-    const faDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
-    const toFa = n => String(n).split('').map(d => faDigits[d] ?? d).join('');
+    const termsBtn1 = document.getElementById('rulesBtn1');
+    const termsBtn2 = document.getElementById('rulesBtn2');
 
     const DEFAULT_TERMS_RULES = [
         'اعتبار استفاده تا ۳۰ روز آینده.',
@@ -62,8 +59,8 @@ function openWinTab() {
         const list = DEFAULT_TERMS_RULES;
         termsListEl.innerHTML = list.map((rule, i) => `
       <li class="terms-item">
+      <div class="terms-num"><span>${i + 1}</span></div>
         <span>${rule}</span>
-        <span class="terms-num">${toFa(i + 1)}</span>
       </li>
     `).join('');
 
