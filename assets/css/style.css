@@ -388,7 +388,7 @@ body {
 
 .btn-submit {
     color: var(--color-forground);
-    width: 195;
+    min-width: 195px;
     height: 80;
     border-radius: 320px;
     padding: 24px;
@@ -401,6 +401,13 @@ body {
     letter-spacing: 0%;
     text-align: center;
     vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.btn-submit span{
+height: 16px;
 }
 
 /* wheel */
