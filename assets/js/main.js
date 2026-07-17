@@ -79,3 +79,67 @@ function clickOnSpinButton() {
 
     startSpin()
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // انتخاب همه ناوها (دسکتاپ + موبایل)
+    const allNavItems = document.querySelectorAll('.main-nav .nav-item, .mobile-nav .nav-item');
+
+    // گروه‌بندی سکشن‌ها بر اساس href
+    const sectionsMap = new Map(); // href -> section element
+    const hrefToNavItems = new Map(); // href -> [navItem, navItem, ...]
+
+    allNavItems.forEach(item => {
+        const href = item.getAttribute('href');
+        if (href && href.startsWith('#') && href.length > 1) {
+            if (!sectionsMap.has(href)) {
+                const section = document.querySelector(href);
+                if (section) sectionsMap.set(href, section);
+            }
+            if (!hrefToNavItems.has(href)) hrefToNavItems.set(href, []);
+            hrefToNavItems.get(href).push(item);
+        }
+    });
+
+    function setActive(activeHref) {
+        allNavItems.forEach(item => item.classList.remove('active'));
+        const items = hrefToNavItems.get(activeHref) || [];
+        items.forEach(item => item.classList.add('active'));
+
+        // اگه لینک "خانه" (بدون هش واقعی) بود جدا مدیریت کن
+        if (!activeHref) {
+            document.querySelectorAll('.main-nav .nav-item:first-child, .mobile-nav .nav-item:first-child')
+                .forEach(item => item.classList.add('active'));
+        }
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const href = [...sectionsMap.entries()].find(([, sec]) => sec === entry.target)?.[0];
+                if (href) setActive(href);
+            }
+        });
+    }, {
+        root: null,
+        rootMargin: '-30% 0px -60% 0px',
+        threshold: 0
+    });
+
+    sectionsMap.forEach(section => observer.observe(section));
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY < 50) {
+            setActive(null); // فعال کردن آیتم اول (میهمان شو)
+        }
+    });
+
+    allNavItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            const href = item.getAttribute('href');
+            if (href && href.startsWith('#') && href.length > 1) {
+                e.preventDefault();
+                document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+});
