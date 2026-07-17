@@ -696,8 +696,8 @@
                 <p>کلیه حقوق متعلق به میهمان شو می باشد.</p>
             </div>
             <div class="footer-links">
-                <a href="#">قوانین و مقررات</a>
-                <a href="#">میهمان شو</a>
+                <p id="rulesBtn2">قوانین و مقررات</p>
+                <a href="https://www.mihmansho.com/">میهمان شو</a>
             </div>
         </footer>
         <!-- OTP Modal / Drawer -->
@@ -788,9 +788,38 @@
                         type="button" id="winCta">
                         رفتن به میهمان شو
                     </a>
-                    <button class="win-terms" type="button" id="winTerms">قوانین
+                    <button class="win-terms" type="button"
+                        id="rulesBtn1">قوانین
                         شرایط استفاده از جایزه</button>
                 </div>
+            </div>
+        </div>
+        <!-- Terms Modal / Drawer (opened via openTermsModal()) -->
+        <div class="overlay" id="termsOverlay">
+            <div class="win-modal terms-modal" role="dialog" aria-modal="true"
+                aria-labelledby="termsTitle">
+                <button class="win-close" id="termsClose" type="button"
+                    aria-label="بستن">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#241250"
+                        stroke-width="2.4" stroke-linecap="round">
+                        <line x1="5" y1="5" x2="19" y2="19" />
+                        <line x1="19" y1="5" x2="5" y2="19" />
+                    </svg>
+                </button>
+
+                <div class="terms-header">
+                    <h2 class="terms-title" id="termsTitle">شرایط استفاده از
+                        جایزه</h2>
+                </div>
+
+                <div class="terms-card">
+                    <p class="terms-subtitle" id="termsSubtitle">قوانین و نکات
+                        مهم کمپین «یک شب میهمان‌شو»:</p>
+                    <ul class="terms-list" id="termsList"></ul>
+                </div>
+
+                <button class="win-cta" id="termsSubmit" type="button">متوجه
+                    شدم</button>
             </div>
         </div>
 

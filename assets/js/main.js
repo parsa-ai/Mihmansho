@@ -37,6 +37,59 @@ function openWinTab() {
     window.openWinnerModal = openWinnerModal;
     window.closeWinnerModal = closeWinnerModal;
 
+    const termsOverlay = document.getElementById('termsOverlay');
+    const termsCloseBtn = document.getElementById('termsClose');
+    const termsTitleEl = document.getElementById('termsTitle');
+    const termsSubEl = document.getElementById('termsSubtitle');
+    const termsListEl = document.getElementById('termsList');
+    const termsSubmit = document.getElementById('termsSubmit');
+    const termsBtn1 =  document.getElementById('rulesBtn1');
+    const termsBtn2 =  document.getElementById('rulesBtn2');
+
+    const faDigits = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
+    const toFa = n => String(n).split('').map(d => faDigits[d] ?? d).join('');
+
+    const DEFAULT_TERMS_RULES = [
+        'اعتبار استفاده تا ۳۰ روز آینده.',
+        'قابل استفاده برای یک رزرو موفق بر روی پلتفرم.',
+        'مخصوص ویلاهای منتخب با تگ تخفیف فعال.',
+    ];
+
+    function openTermsModal() {
+        termsTitleEl.textContent = 'شرایط استفاده از جایزه';
+        termsSubEl.textContent = 'قوانین و نکات مهم کمپین «یک شب میهمان‌شو»:';
+
+        const list = DEFAULT_TERMS_RULES;
+        termsListEl.innerHTML = list.map((rule, i) => `
+      <li class="terms-item">
+        <span>${rule}</span>
+        <span class="terms-num">${toFa(i + 1)}</span>
+      </li>
+    `).join('');
+
+        termsOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeTermsModal() {
+        termsOverlay.classList.remove('open');
+        if (!overlay.classList.contains('open')) document.body.style.overflow = '';
+    }
+
+    termsCloseBtn.addEventListener('click', closeTermsModal);
+    termsSubmit.addEventListener('click', closeTermsModal);
+    termsOverlay.addEventListener('click', (e) => { if (e.target === termsOverlay) closeTermsModal(); });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && termsOverlay.classList.contains('open')) closeTermsModal();
+    });
+
+    termsBtn1.addEventListener('click', () => openTermsModal());
+    termsBtn2.addEventListener('click', () => openTermsModal());
+
+    window.openTermsModal = openTermsModal;
+    window.closeTermsModal = closeTermsModal;
+
+
     closeBtn.addEventListener('click', closeWinnerModal);
 
     overlay.addEventListener('click', (e) => {
