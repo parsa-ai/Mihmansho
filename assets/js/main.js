@@ -1,85 +1,172 @@
-function clickOnSpinButton() {
-    const wheel = document.querySelector("#main-wheel-circle");
-    const button = document.querySelector("#spin-button");
+function openWinTab() {
+    const PRIZES = {
+        1: { icon: '🏡', title: 'یک شب اقامت رایگان ویلا' },
+        2: { icon: '💸', title: 'کد تخفیف ۵٪' },
+        3: { icon: '🎟️', title: '۱۰٪ کد تخفیف' },
+        4: { icon: '🛎️', title: 'اعتبار سفر' },
+        5: { icon: '🍽️', title: 'شانس دوباره' },
+    };
 
-    const ITEM_COUNT = 8;
-    const STEP = 360 / ITEM_COUNT;
+    const overlay = document.getElementById('winOverlay');
+    const closeBtn = document.getElementById('winClose');
+    const prizeValEl = document.getElementById('winPrizeValue');
+    const prizeIcoEl = document.getElementById('winPrizeIcon');
+    const codeEl = document.getElementById('winCode');
+    const copyBtn = document.getElementById('winCopy');
 
-    let currentRotation = 0;
-    let spinning = false;
-
-    let fastSpinInterval = null;
-    async function getWinnerNumber() {
-        // backend : change example url with you're url and remove uncomment part of this function
-        // const response = await fetch("https://api.example.com/spin", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // });
-
-        // if (!response.ok) {
-        //     throw new Error("Spin failed");
-        // }
-
-        // const data = await response.json();
-        // return data.winner;
-        return new Promise(resolve => {
-            const delay = 1000 + Math.random() * 3000;
-            setTimeout(() => resolve(Math.floor(Math.random() * 8) + 1), delay);
-        });
+    function closeWinnerModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
     }
 
-    async function startSpin() {
-        if (spinning) return;
+    function openWinnerModal(prizeNumber, discountCode) {
+        const n = Math.min(5, Math.max(1, parseInt(prizeNumber, 10) || 1));
+        const prize = PRIZES[n];
 
-        spinning = true;
-        button.disabled = true;
-        button.classList.add("is-spinning");
+        // prizeIcoEl.textContent = prize.icon;
+        prizeValEl.textContent = prize.title;
+        codeEl.textContent = (discountCode || '').toUpperCase();
 
-        fastSpinInterval = setInterval(() => {
-            currentRotation += 90;
-            wheel.style.transition = "transform 0.1s linear";
-            wheel.style.transform = `translateY(290px) rotate(${currentRotation}deg)`;
-        }, 100);
+        copyBtn.textContent = 'کپی لینک';
+        copyBtn.classList.remove('copied');
 
-        try {
-            const winner = await getWinnerNumber();
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
 
-            stopOnNumber(winner);
-        } catch (error) {
-            clearInterval(fastSpinInterval);
-            spinning = false;
-            button.disabled = false;
-            button.classList.remove("is-spinning");
-            alert("خطایی رخ داد، لطفا دوباره تلاش کنید.");
+    window.openWinnerModal = openWinnerModal;
+    window.closeWinnerModal = closeWinnerModal;
+
+    closeBtn.addEventListener('click', closeWinnerModal);
+
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) closeWinnerModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && overlay.classList.contains('open')) {
+            closeWinnerModal();
         }
-    }
+    });
 
-    function stopOnNumber(number) {
-        clearInterval(fastSpinInterval);
+    copyBtn.addEventListener('click', () => {
+        const code = codeEl.textContent.trim();
 
-        const targetSectorAngle = ((ITEM_COUNT - number + 1) % ITEM_COUNT) * STEP;
+        navigator.clipboard.writeText(code).catch(() => { });
 
-        const currentModulo = currentRotation % 360;
-        let delta = targetSectorAngle - currentModulo;
-        if (delta <= 0) delta += 360;
-
-        currentRotation = currentRotation + delta + (360 * 5);
-
-        wheel.style.transition = "transform 4.5s cubic-bezier(0.12, 0.88, 0.08, 1)";
-        wheel.style.transform = `translateY(290px) rotate(${currentRotation}deg)`;
+        copyBtn.textContent = 'کپی شد!';
+        copyBtn.classList.add('copied');
 
         setTimeout(() => {
-            spinning = false;
-            button.disabled = false;
-            button.classList.remove("is-spinning");
-        }, 4500);
+            copyBtn.textContent = 'کپی لینک';
+            copyBtn.classList.remove('copied');
+        }, 1800);
+    });
+
+    function clickOnSpinButton() {
+        const wheel = document.querySelector("#main-wheel-circle");
+        const button = document.querySelector("#spin-button");
+
+        const ITEM_COUNT = 8;
+        const STEP = 360 / ITEM_COUNT;
+
+        let currentRotation = 0;
+        let spinning = false;
+        let fastSpinInterval = null;
+
+        async function getWinnerNumber() {
+            // backend : change example url with you're url and remove uncomment part of this function, create endpoint return json file has {winner :number of 1 -5 winCode : string code}
+            // const response = await fetch("https://api.example.com/spin", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json"
+            //     }
+            // });
+
+            // if (!response.ok) {
+            //     throw new Error("Spin failed");
+            // }
+
+            // const data = await response.json();
+            // return data;
+            const fakeWin = new Promise(resolve => {
+                const delay = 1000 + Math.random() * 3000;
+                setTimeout(() => resolve(Math.floor(Math.random() * 5) + 1), delay);
+            })
+            const data = {
+                winner: await fakeWin, winCode: "hi"
+            }
+            return data
+        }
+
+        async function startSpin() {
+            if (spinning) return;
+
+            spinning = true;
+            button.disabled = true;
+            button.classList.add("is-spinning");
+
+            fastSpinInterval = setInterval(() => {
+                currentRotation += 90;
+                wheel.style.transition = "transform 0.1s linear";
+                wheel.style.transform = `translateY(290px) rotate(${currentRotation}deg)`;
+            }, 100);
+
+            try {
+                const { winner, winCode } = await getWinnerNumber();
+
+                stopOnNumber(winner);
+
+                setTimeout(() => {
+                    openWinnerModal(winner, winCode);
+                }, 4500);
+
+            } catch (error) {
+                console.log(error);
+
+                clearInterval(fastSpinInterval);
+
+                spinning = false;
+                button.disabled = false;
+                button.classList.remove("is-spinning");
+
+                alert("خطایی رخ داد، لطفا دوباره تلاش کنید.");
+            }
+        }
+
+        function stopOnNumber(number) {
+            clearInterval(fastSpinInterval);
+
+            const targetSectorAngle =
+                ((ITEM_COUNT - number + 1) % ITEM_COUNT) * STEP;
+
+            const currentModulo = currentRotation % 360;
+
+            let delta = targetSectorAngle - currentModulo;
+
+            if (delta <= 0) delta += 360;
+
+            currentRotation += delta + (360 * 5);
+
+            wheel.style.transition =
+                "transform 4.5s cubic-bezier(0.12,0.88,0.08,1)";
+            wheel.style.transform =
+                `translateY(290px) rotate(${currentRotation}deg)`;
+
+            setTimeout(() => {
+                spinning = false;
+                button.disabled = false;
+                button.classList.remove("is-spinning");
+            }, 4500);
+        }
+
+        startSpin();
     }
 
-    startSpin()
+    window.clickOnSpinButton = clickOnSpinButton;
 }
 
+openWinTab();
 document.addEventListener('DOMContentLoaded', () => {
     const allNavItems = document.querySelectorAll('.main-nav .nav-item, .mobile-nav .nav-item');
 
