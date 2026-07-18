@@ -29,6 +29,86 @@
     .prize-item-card {
         flex: 1 1 calc(50% - 12px);
     }
+    
+
+    .referral-card {
+        height: auto;
+        flex-direction: column-reverse;
+        padding: 32px 20px;
+        border-radius: 32px;
+        gap: 24px;
+    }
+
+    .referral-title {
+        font-size: 18px;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .referral-title-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .referral-title-icon svg {
+        transform: scale(0.6);
+        transform-origin: center;
+    }
+
+    .referral-text {
+        font-size: 14px;
+        line-height: 26px;
+        text-align: center;
+        margin-top: 12px;
+    }
+
+    .share-link-wrapper {
+        flex-direction: column;
+        height: auto;
+        gap: 8px;
+        margin-top: 24px;
+
+    }
+
+    .link-box {
+        height: auto;
+    }
+
+    .link-label {
+        font-size: 12px;
+    }
+
+    .link-text {
+        height: auto;
+        font-size: 13px;
+        padding: 16px;
+        word-break: break-all;
+        text-align: center;
+    }
+
+    .footer-text p {
+        height: 16px;
+    }
+
+    .btn-copy {
+        height: 20px;
+        padding: 12px 24px;
+        font-size: 16px;
+        gap: 0;
+    }
+
+    .btn-copy svg {
+        transform: scale(0.6);
+        transform-origin: center;
+    }
+        
+
+    .social-icons {
+        margin-top: 24px;
+        height: auto;
+        justify-content: space-between;
+    }
+
 }
 
 @media (max-width: 768px) {
