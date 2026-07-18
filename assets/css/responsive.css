@@ -63,11 +63,11 @@
         padding: 4px;
         gap: 4px;
     }
-    
-    .wheel-content-wapper .btn-chance:not(.btn-chance-blur){
+
+    .wheel-content-wapper .btn-chance:not(.btn-chance-blur) {
         margin-bottom: 72px;
     }
-    
+
     .btn-chance .chance {
         width: 20px;
         height: 20px;
@@ -240,7 +240,8 @@
 
     /* referral */
     .referral {
-        margin-top: 80px;
+        padding-top: 80px;
+        margin: 0;
     }
 
     .referral-card {
@@ -297,9 +298,11 @@
         word-break: break-all;
         text-align: center;
     }
-    .footer-text p{
+
+    .footer-text p {
         height: 16px;
     }
+
     .btn-copy {
         height: 20px;
         padding: 12px 24px;

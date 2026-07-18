@@ -670,7 +670,7 @@ gap: 4px;
 /* referral */
 .referral {
     /* overflow: hidden; */
-    margin-top: 140px;
+    padding: 140px;
     position: relative;
 }
 
