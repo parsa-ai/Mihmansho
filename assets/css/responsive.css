@@ -4,6 +4,10 @@
         width: min(1216px, calc(100% - 32px));
     }
 
+    .hero{
+            margin-bottom: -400px;
+    }
+    
     .hero-title {
         font-size: 48px;
     }
@@ -101,7 +105,7 @@
         transform: scale(0.6);
         transform-origin: center;
     }
-        
+
 
     .social-icons {
         margin-top: 24px;
@@ -168,6 +172,7 @@
     .hero {
         height: auto;
         min-height: 655px;
+        margin-bottom: calc(-400px + 41vw);
         padding-top: 0;
         background:
             radial-gradient(circle at top,
@@ -581,7 +586,9 @@
 
 @media (max-width: 400px) {
 
-
+.hero{
+    margin-bottom: -400px;
+}
     .prizes-grid {
         grid-template-columns: 1fr;
     }
