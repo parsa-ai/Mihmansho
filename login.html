@@ -166,9 +166,9 @@
                 </div>
                 <div class="header-actions">
                     <div class="btn-chance">
-                        <!-- backend: add real number -->
+                        <!-- backend: add real number (just english number!  0 - 6 ) -->
                         <div class="chance">
-                            <span>۶</span>
+                            <span id="chance-count">6</span>
                         </div>
                         <span>شانس شما</span>
                         <svg width="24" height="24" viewBox="0 0 24 24"
@@ -931,7 +931,7 @@
                                     </defs>
                                 </svg>
                             </a>
-                           
+
                             <a href="#" class="social-icon">
                                 <!-- whatsapp -->
                                 <svg width="30" height="30" viewBox="0 0 30 30"
@@ -1510,6 +1510,39 @@
                 </div>
 
                 <button class="win-cta" id="termsSubmit" type="button">متوجه
+                    شدم</button>
+            </div>
+        </div>
+        <!-- referral Modal / Drawer (opened via openreferralModal()) -->
+        <div class="overlay" id="referralOverlay">
+            <div class="win-modal terms-modal" role="dialog"
+                aria-modal="true"
+                aria-labelledby="referralTitle">
+                <div class="win-header-top">
+                    <button class="win-close" id="referralClose" type="button"
+                        aria-label="بستن">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="#241250"
+                            stroke-width="2.4" stroke-linecap="round">
+                            <line x1="5" y1="5" x2="19" y2="19" />
+                            <line x1="19" y1="5" x2="5" y2="19" />
+                        </svg>
+                    </button>
+
+                    <div class="terms-header">
+                        <h2 class="terms-title" id="referralTitle">شرایط
+                            استفاده از
+                            جایزه</h2>
+                    </div>
+                </div>
+
+                <div class="terms-card">
+                    <p class="terms-subtitle" id="referralSubtitle">قوانین و
+                        نکات
+                        مهم کمپین «یک شب میهمان‌شو»:</p>
+                    <ul class="terms-list" id="referralList"></ul>
+                </div>
+
+                <button class="win-cta" id="referralSubmit" type="button">متوجه
                     شدم</button>
             </div>
         </div>

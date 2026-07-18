@@ -117,9 +117,47 @@ function openWinTab() {
         }, 1800);
     });
 
+
+    const referralOverlay = document.getElementById('referralOverlay');
+    const referralCloseBtn = document.getElementById('referralClose');
+    const referralTitleEl = document.getElementById('referralTitle');
+    const referralSubEl = document.getElementById('referralSubtitle');
+    const referralSubmit = document.getElementById('referralSubmit');
+
+    function openreferralModal() {
+        referralTitleEl.textContent = 'دعوت دوستان';
+        referralSubEl.textContent = "با دعوت کردن دوست هات میتونی شانس بیشتری دریافت کنی و دوباره شانست رو امتحان کنی!";
+
+        referralOverlay.classList.add('open');
+
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closereferralModal() {
+        referralOverlay.classList.remove('open');
+        window.location.replace("#referral")
+        if (!overlay.classList.contains('open')) document.body.style.overflow = '';
+    }
+
+    referralCloseBtn.addEventListener('click', closereferralModal);
+    referralSubmit.addEventListener('click', closereferralModal);
+    referralOverlay.addEventListener('click', (e) => { if (e.target === referralOverlay) closereferralModal(); });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && referralOverlay.classList.contains('open')) closereferralModal();
+    });
+
+    window.openreferralModal = openreferralModal;
+    window.closereferralModal = closereferralModal;
+
     function clickOnSpinButton() {
         const wheel = document.querySelector("#main-wheel-circle");
         const button = document.querySelector("#spin-button");
+        const chance = document.querySelector("#chance-count").innerHTML;
+        if (chance <= 0) {
+            openreferralModal()
+
+            return
+        }
 
         const ITEM_COUNT = 8;
         const STEP = 360 / ITEM_COUNT;
