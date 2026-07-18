@@ -589,6 +589,9 @@
     .hero {
         margin-bottom: -350px;
     }
+    .hero-login{
+        min-height: 480px;
+    }
 
     .prizes-grid {
         grid-template-columns: 1fr;
@@ -615,9 +618,12 @@
 
 @media (min-width: 400px) and (max-width: 500px) {
     .hero {
-
         margin-bottom: calc(-450px + 30vw);
     }
+}
+
+.hero-login {
+    min-height: 555px;
 }
 
 @media (min-width: 800px) and (max-width: 1124px) {
