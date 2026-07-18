@@ -64,7 +64,7 @@
         gap: 4px;
     }
     
-    .btn-chance:not(.btn-chance-blur){
+    .wheel-content-wapper .btn-chance:not(.btn-chance-blur){
         margin-bottom: 72px;
     }
     

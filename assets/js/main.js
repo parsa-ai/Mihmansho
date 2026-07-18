@@ -1,10 +1,13 @@
 function openWinTab() {
     const PRIZES = {
-        1: { icon: '🏡', title: 'یک شب اقامت رایگان ویلا' },
-        2: { icon: '💸', title: 'کد تخفیف ۵٪' },
-        3: { icon: '🎟️', title: '۱۰٪ کد تخفیف' },
-        4: { icon: '🛎️', title: 'اعتبار سفر' },
-        5: { icon: '🍽️', title: 'شانس دوباره' },
+        1: { icon: './assets/images/other1.png', title: 'کد تخفیف ۵٪' },
+        2: { icon: './assets/images/other2.png', title: 'کد تخفیف ۱۰٪' },
+        3: { icon: './assets/images/other3.png', title: 'اعتبار سفر' },
+        4: { icon: './assets/images/other4.png', title: 'یک شب اقامت رایگان ویلا' },
+        5: { icon: './assets/images/other5.png', title: 'شانس دوباره' },
+        6: { icon: './assets/images/other6.png', title: 'دعوت دوستان' },
+        7: { icon: './assets/images/other4.png', title: 'یک شب اقامت رایگان ویلا' },
+        8: { icon: './assets/images/other5.png', title: 'شانس دوباره' },
     };
 
     const overlay = document.getElementById('winOverlay');
@@ -20,9 +23,10 @@ function openWinTab() {
     }
 
     function openWinnerModal(prizeNumber, discountCode) {
-        const n = Math.min(5, Math.max(1, parseInt(prizeNumber, 10) || 1));
+        const n = Math.min(8, Math.max(1, parseInt(prizeNumber, 10) || 1));
         const prize = PRIZES[n];
 
+        prizeIcoEl.src = prize.icon;
         // prizeIcoEl.textContent = prize.icon;
         prizeValEl.textContent = prize.title;
         codeEl.textContent = (discountCode || '').toUpperCase();
@@ -125,7 +129,7 @@ function openWinTab() {
         let fastSpinInterval = null;
 
         async function getWinnerNumber() {
-            // backend : change example url with you're url and remove uncomment part of this function, create endpoint return json file has {winner :number of 1 -5 winCode : string code}
+            // backend : change example url with you're url and remove uncomment part of this function, create endpoint return json file has {winner :number of 1 - 8  winCode : string code}
             // const response = await fetch("https://api.example.com/spin", {
             //     method: "POST",
             //     headers: {
@@ -141,7 +145,7 @@ function openWinTab() {
             // return data;
             const fakeWin = new Promise(resolve => {
                 const delay = 1000 + Math.random() * 3000;
-                setTimeout(() => resolve(Math.floor(Math.random() * 5) + 1), delay);
+                setTimeout(() => resolve(Math.floor(Math.random() * 8) + 1), delay);
             })
             const data = {
                 winner: await fakeWin, winCode: "hi"

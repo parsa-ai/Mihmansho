@@ -46,7 +46,7 @@
 .win-modal {
     position: relative;
     width: 100%;
-    max-width: 530px;
+    max-width: 640px;
     max-height: calc(100vh - 40px);
     overflow-y: auto;
     background:
@@ -191,7 +191,7 @@
     border: none;
     cursor: pointer;
     font-family: inherit;
-    font-size: 14px;
+    font-size: 20px;
     font-weight: 700;
     color: #241250;
     background: #fff;
@@ -235,10 +235,11 @@
     flex: 1;
     border: none;
     cursor: pointer;
-    background: rgba(255, 255, 255, .08);
+    background: #200C55;
+    border: 2px solid #351B78;
     color: #fff;
     font-family: inherit;
-    font-size: 13.5px;
+    font-size: 16px;
     font-weight: 700;
     border-radius: 999px;
     padding: 15px 10px;
@@ -357,6 +358,17 @@
 
 /* ===== Mobile -> bottom drawer ===== */
 @media (max-width:640px) {
+    .win-cta {
+        font-size: 14px;
+        height: 72px;
+        flex: none;
+    }
+
+    .win-prize-icon {
+        width: 56px;
+        height: 56px;
+    }
+
     .overlay {
         align-items: flex-end;
         padding: 0;
@@ -410,7 +422,7 @@
     }
 
     .win-actions {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     .terms-title {
