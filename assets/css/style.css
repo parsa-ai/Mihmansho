@@ -816,27 +816,19 @@ gap: 4px;
     border-top: 2px solid #70B2FF;
 }
 
-.social-icons a:nth-child(2) {
-    background: radial-gradient(78.14% 100% at 51.21% -0.03%, #FE2D99 0%, #4D1833 100%);
-    border-top: 2px solid #FF63B3;
-}
 
-.social-icons a:nth-child(3) {
+.social-icons a:nth-child(2) {
     background: radial-gradient(78.14% 100% at 51.21% -0.03%, #2DFEB5 0%, #184D41 100%);
     border-top: 2px solid #49F8BA;
 }
 
-.social-icons a:nth-child(4) {
-    background: radial-gradient(78.14% 100% at 51.21% -0.03%, #2D68FE 0%, #150D59 100%);
-    border-top: 2px solid #4172F9;
-}
 
-.social-icons a:nth-child(5) {
+.social-icons a:nth-child(3) {
     background: radial-gradient(78.14% 100% at 51.21% -0.03%, #36977E 0%, #0C4133 100%);
     border-top: 2px solid #4BB297;
 }
 
-.social-icons a:nth-child(6) {
+.social-icons a:nth-child(4) {
     background: radial-gradient(78.14% 100% at 51.21% -0.03%, #F42DFE 0%, #3E184D 100%);
     border-top: 2px solid #EF44F9;
 }
