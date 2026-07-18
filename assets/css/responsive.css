@@ -4,10 +4,10 @@
         width: min(1216px, calc(100% - 32px));
     }
 
-    .hero{
-            margin-bottom: -400px;
+    .hero {
+        margin-bottom: -400px;
     }
-    
+
     .hero-title {
         font-size: 48px;
     }
@@ -33,7 +33,7 @@
     .prize-item-card {
         flex: 1 1 calc(50% - 12px);
     }
-    
+
 
     .referral-card {
         height: auto;
@@ -586,9 +586,10 @@
 
 @media (max-width: 400px) {
 
-.hero{
-    margin-bottom: -400px;
-}
+    .hero {
+        margin-bottom: -350px;
+    }
+
     .prizes-grid {
         grid-template-columns: 1fr;
     }
@@ -610,4 +611,17 @@
         flex: 1 1 calc(50% - 12px);
     }
 
+}
+
+@media (min-width: 400px) and (max-width: 500px) {
+    .hero {
+
+        margin-bottom: calc(-450px + 30vw);
+    }
+}
+
+@media (min-width: 800px) and (max-width: 1124px) {
+    .hero {
+        margin-bottom: -540px
+    }
 }
