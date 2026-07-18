@@ -4,7 +4,7 @@ function openWinTab() {
         2: { icon: './assets/images/other2.png', title: 'کد تخفیف ۱۰٪' },
         3: { icon: './assets/images/other3.png', title: 'اعتبار سفر' },
         4: { icon: './assets/images/other4.png', title: 'یک شب اقامت رایگان ویلا' },
-        5: { icon: './assets/images/other5.png', title: 'شانس دوباره' },
+        5: { icon: './assets/images/other4.png', title: 'یک شب اقامت رایگان ویلا' },
         6: { icon: './assets/images/other6.png', title: 'دعوت دوستان' },
         7: { icon: './assets/images/other4.png', title: 'یک شب اقامت رایگان ویلا' },
         8: { icon: './assets/images/other5.png', title: 'شانس دوباره' },
