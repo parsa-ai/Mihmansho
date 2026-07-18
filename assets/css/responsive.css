@@ -156,6 +156,7 @@
     .phone-input {
         gap: 0 !important;
         min-height: 56px;
+        max-height: 56px;
         padding-inline: 12px;
     }
 
@@ -291,12 +292,14 @@
 
     .link-text {
         height: auto;
-        font-size: 16px;
+        font-size: 13px;
         padding: 16px;
         word-break: break-all;
         text-align: center;
     }
-
+    .footer-text p{
+        height: 16px;
+    }
     .btn-copy {
         height: 20px;
         padding: 12px 24px;
