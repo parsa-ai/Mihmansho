@@ -409,6 +409,7 @@ gap: 4px;
 .btn-submit {
     color: var(--color-forground);
     min-width: 195px;
+    max-width: 300px;
     height: 80;
     border-radius: 320px;
     padding: 24px;
