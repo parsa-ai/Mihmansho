@@ -58,6 +58,16 @@
         font-size: 13px;
     }
 
+    .wheel-content-wapper .btn-chance {
+        height: 28;
+        padding: 4px;
+        gap: 4px;
+    }
+    
+    .btn-chance:not(.btn-chance-blur){
+        margin-bottom: 72px;
+    }
+    
     .btn-chance .chance {
         width: 20px;
         height: 20px;
@@ -72,7 +82,7 @@
     /* .et {
         display: none;
     } */
-     
+
 
 
     .hero {
@@ -203,9 +213,18 @@
         height: 64px;
     }
 
+    .wheel-circle {
+        width: 135%;
+    }
+
+    .wheel {
+        height: 560px;
+        margin-bottom: 20px;
+    }
+
     .wheel-content-wapper p {
         margin-top: 14px;
-        margin-bottom: 65px;
+        margin-bottom: 125px;
         font-size: 12px;
     }
 
