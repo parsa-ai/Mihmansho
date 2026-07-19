@@ -1441,7 +1441,8 @@
             </div>
         </div>
         <!-- Winner Modal / Drawer -->
-        <div class="overlay" id="winOverlay">
+        <!-- backend : change this from new to old if user have full info -->
+        <div class="overlay" id="winOverlay" data-user="new">
             <div class="win-modal" role="dialog" aria-modal="true"
                 aria-labelledby="winTitle">
                 <button class="win-close" id="winClose" type="button"
@@ -1453,35 +1454,78 @@
                     </svg>
                 </button>
 
-                <div class="win-emoji" id="winEmoji">🥳</div>
-                <h2 class="win-title" id="winTitle">تبریک! برنده شدید</h2>
-                <p class="win-desc">کد تخفیف اختصاصی شما با موفقیت صادر شد. با
-                    دریافت و ثبت آن، گام اول سفر را آغاز کنید.</p>
+                <div class="win-content" id="winContent">
+                    <div class="win-emoji" id="winEmoji">🥳</div>
+                    <h2 class="win-title" id="winTitle">تبریک! برنده شدید</h2>
+                    <p class="win-desc">کد تخفیف اختصاصی شما با موفقیت صادر شد.
+                        با دریافت و ثبت آن، گام اول سفر را آغاز کنید.</p>
 
-                <div class="win-prize">
-                    <div class="win-prize-text">
-                        <p class="win-prize-label">جایزه دریافتی :</p>
-                        <p class="win-prize-value" id="winPrizeValue"></p>
+                    <div class="win-prize">
+                        <div class="win-prize-text">
+                            <p class="win-prize-label">جایزه دریافتی :</p>
+                            <p class="win-prize-value" id="winPrizeValue"></p>
+                        </div>
+                        <img loading="lazy" class="win-prize-icon"
+                            id="winPrizeIcon" src="./assets/images/other1.png">
                     </div>
-                    <img class="win-prize-icon" id="winPrizeIcon"
-                        src="./assets/images/other1.png">
-                </div>
 
-                <p class="win-code-label">کد هدیه انحصاری شما</p>
-                <div class="win-code-row">
-                    <button class="win-copy" id="winCopy" type="button">کپی
-                        لینک</button>
-                    <div class="win-code-box" id="winCode">-----</div>
-                </div>
+                    <p class="win-code-label">کد هدیه انحصاری شما</p>
+                    <div class="win-code-row">
+                        <button class="win-copy" id="winCopy" type="button">کپی
+                            لینک</button>
+                        <div class="win-code-box" id="winCode">-----</div>
+                    </div>
 
-                <div class="win-actions">
-                    <a href="https://www.mihmansho.com/" class="win-cta"
-                        type="button" id="winCta">
-                        رفتن به میهمان شو
-                    </a>
-                    <button class="win-terms" type="button"
-                        id="rulesBtn1">قوانین
-                        شرایط استفاده از جایزه</button>
+                    <div class="win-actions">
+                        <a href="https://www.mihmansho.com/" class="win-cta"
+                            id="winCta">رفتن به میهمان شو</a>
+                        <button class="win-terms" type="button"
+                            id="rulesBtn1">قوانین شرایط استفاده از
+                            جایزه</button>
+                    </div>
+                </div>
+                <div class="win-form-content" id="winFormContent"
+                    style="display: none;">
+                    <div class="win-emoji" id="winEmoji">🥳</div>
+                    <h2 class="win-title">تبریک! برنده شدید</h2>
+                    <p class="win-desc">لطفاً اطلاعات خود را وارد کنید تا
+                        جایزه‌تان را دریافت کنید.</p>
+
+                    <div class="win-prize">
+                        <div class="win-prize-text">
+                            <p class="win-prize-label">جایزه دریافتی :</p>
+                            <p class="win-prize-value"
+                                id="winPrizeValueForm"></p>
+                        </div>
+                        <img loading="lazy" class="win-prize-icon"
+                            id="winPrizeIconForm"
+                            src="./assets/images/other1.png">
+                    </div>
+
+                    <form id="userInfoForm" class="win-user-form">
+                        <div class="form-name">
+                            <div class="form-group">
+                                <input type="text" id="userFirstName"
+                                    placeholder="نام" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="userLastName"
+                                    placeholder="نام خانوادگی" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <select id="userGender" required>
+                                <option value>جنسیت را انتخاب کنید</option>
+                                <option value="male">مرد</option>
+                                <option value="female">زن</option>
+                            </select>
+                        </div>
+
+                        <div class="win-actions">
+                            <button type="submit" class="win-cta">تأیید و
+                                ادامه</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
