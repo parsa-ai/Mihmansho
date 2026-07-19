@@ -74,17 +74,15 @@ function openWinTab() {
         e.preventDefault();
 
         const firstName = document.getElementById('userFirstName').value.trim();
-        const lastName = document.getElementById('userLastName').value.trim();
         const gender = document.getElementById('userGender').value;
 
-        if (!firstName || !lastName || !gender) {
+        if (!firstName || !gender) {
             alert('لطفاً تمام فیلدها را پر کنید');
             return;
         }
 
         const userData = {
             firstName,
-            lastName,
             gender,
             timestamp: new Date().toISOString()
         };
