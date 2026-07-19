@@ -14,86 +14,28 @@ function openWinTab() {
     const closeBtn = document.getElementById('winClose');
     const prizeValEl = document.getElementById('winPrizeValue');
     const prizeIcoEl = document.getElementById('winPrizeIcon');
-    const prizeValFormEl = document.getElementById('winPrizeValueForm');
-    const prizeIcoFormEl = document.getElementById('winPrizeIconForm');
     const codeEl = document.getElementById('winCode');
     const copyBtn = document.getElementById('winCopy');
-    const winContent = document.getElementById('winContent');
-    const winFormContent = document.getElementById('winFormContent');
-    const userInfoForm = document.getElementById('userInfoForm');
-
-    let currentPrizeNumber = null;
-    let currentDiscountCode = null;
 
     function closeWinnerModal() {
         overlay.classList.remove('open');
         document.body.style.overflow = '';
     }
 
-    function showContentView() {
-        winContent.style.display = 'block';
-        winFormContent.style.display = 'none';
-    }
-
-    function showFormView() {
-        winContent.style.display = 'none';
-        winFormContent.style.display = 'block';
-        document.getElementById('userFirstName').focus();
-    }
-
     function openWinnerModal(prizeNumber, discountCode) {
         const n = Math.min(8, Math.max(1, parseInt(prizeNumber, 10) || 1));
         const prize = PRIZES[n];
 
-        currentPrizeNumber = n;
-        currentDiscountCode = discountCode || '';
-
         prizeIcoEl.src = prize.icon;
         prizeValEl.textContent = prize.title;
-        codeEl.textContent = currentDiscountCode.toUpperCase();
-
-        prizeIcoFormEl.src = prize.icon;
-        prizeValFormEl.textContent = prize.title;
+        codeEl.textContent = (discountCode || '').toUpperCase();
 
         copyBtn.textContent = 'کپی لینک';
         copyBtn.classList.remove('copied');
 
-        const userType = overlay.getAttribute('data-user');
-
-        if (userType === 'new') {
-            showFormView();
-        } else {
-            showContentView();
-        }
-
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
     }
-
-    userInfoForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const firstName = document.getElementById('userFirstName').value.trim();
-        const gender = document.getElementById('userGender').value;
-
-        if (!firstName || !gender) {
-            alert('لطفاً تمام فیلدها را پر کنید');
-            return;
-        }
-
-        const userData = {
-            firstName,
-            gender,
-            timestamp: new Date().toISOString()
-        };
-        // backend: update user from userData info and change data-user in html
-
-        overlay.setAttribute('data-user', 'old');
-
-        showContentView();
-
-        userInfoForm.reset();
-    });
 
     window.openWinnerModal = openWinnerModal;
     window.closeWinnerModal = closeWinnerModal;
