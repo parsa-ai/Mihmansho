@@ -1,4 +1,3 @@
-
 function otpMain() {
     const authForm = document.getElementById('authForm');
     const phoneInput = document.getElementById('phone');
@@ -11,9 +10,17 @@ function otpMain() {
     const timerEl = document.getElementById('otpTimer');
     const statusEl = document.getElementById('otpStatus');
     const phoneLabel = document.getElementById('otpPhone');
+    
+    const otpContent = document.getElementById('otpContent');
+    const otpUserForm = document.getElementById('otpUserForm');
+    const userDataForm = document.getElementById('userDataForm');
+    const userNameInput = document.getElementById('userName');
+    const userGenderSelect = document.getElementById('userGender');
+    const formStatus = document.getElementById('formStatus');
 
     let timerId = null;
     let seconds = 90;
+    let isNewUser = true;
 
     function toFa(str) {
         const map = { '0': '۰', '1': '۱', '2': '۲', '3': '۳', '4': '۴', '5': '۵', '6': '۶', '7': '۷', '8': '۸', '9': '۹' };
@@ -54,6 +61,10 @@ function otpMain() {
         statusEl.textContent = '';
         statusEl.classList.remove('ok');
         submitBtn.disabled = true;
+        
+        otpContent.style.display = 'block';
+        otpUserForm.style.display = 'none';
+        
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
         startTimer();
@@ -64,6 +75,16 @@ function otpMain() {
         overlay.classList.remove('open');
         document.body.style.overflow = '';
         clearInterval(timerId);
+    }
+
+    function showUserForm() {
+        otpContent.style.display = 'none';
+        otpUserForm.style.display = 'block';
+        userNameInput.value = '';
+        userGenderSelect.value = '';
+        formStatus.textContent = '';
+        formStatus.classList.remove('ok');
+        setTimeout(() => userNameInput.focus(), 100);
     }
 
     authForm.addEventListener('submit', (e) => {
@@ -131,16 +152,50 @@ function otpMain() {
 
     submitBtn.addEventListener('click', () => {
         const code = fields.map(f => f.value).join('');
-        // backend: replace with real API check
+        // backend: replace with real API check + isNewUser in res
         if (code.length === fields.length) {
             statusEl.classList.add('ok');
             statusEl.textContent = 'کد با موفقیت تایید شد.';
-            setTimeout(closeOtp, 900);
+            
+            setTimeout(() => {
+                if (isNewUser) {
+                    showUserForm();
+                } else {
+                    closeOtp();
+                }
+            }, 900);
         } else {
             fields.forEach(f => { if (!f.value) f.classList.add('error'); });
             statusEl.classList.remove('ok');
             statusEl.textContent = 'لطفا کد را کامل وارد کنید.';
         }
+    });
+
+    userDataForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = userNameInput.value.trim();
+        const gender = userGenderSelect.value;
+
+        if (!name || !gender) {
+            formStatus.textContent = 'لطفا تمام فیلدها را پر کنید.';
+            formStatus.classList.remove('ok');
+            return;
+        }
+
+        const userData = {
+            name,
+            gender,
+            phone: phoneInput.value.trim(),
+            timestamp: new Date().toISOString()
+        };
+
+        formStatus.classList.add('ok');
+        formStatus.textContent = 'ثبت نام با موفقیت انجام شد.';
+
+        setTimeout(() => {
+            closeOtp();
+        }, 900);
     });
 };
 

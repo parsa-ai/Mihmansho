@@ -1403,41 +1403,73 @@
                     </svg>
                 </button>
 
-                <h2 class="otp-title" id="otpTitle">تایید شماره موبایل</h2>
-                <p class="otp-desc">لطفا کد ارسال شده به شماره موبایل <b
-                        id="otpPhone">09360212700</b> را وارد کنید.</p>
+                <!-- محتوای OTP -->
+                <div class="otp-content" id="otpContent">
+                    <h2 class="otp-title" id="otpTitle">تایید شماره موبایل</h2>
+                    <p class="otp-desc">لطفا کد ارسال شده به شماره موبایل <b
+                            id="otpPhone">09360212700</b> را وارد کنید.</p>
 
-                <div class="otp-fields" id="otpFields">
-                    <input maxlength="1" inputmode="numeric"
-                        autocomplete="one-time-code" aria-label="رقم ۱">
-                    <input maxlength="1" inputmode="numeric" aria-label="رقم ۲">
-                    <input maxlength="1" inputmode="numeric" aria-label="رقم ۳">
-                    <input maxlength="1" inputmode="numeric" aria-label="رقم ۴">
-                    <input maxlength="1" inputmode="numeric" aria-label="رقم ۵">
-                </div>
-
-                <div class="otp-meta">
-                    <button class="otp-edit" type="button" id="otpEdit">
-                        <svg viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="1.8"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 20h9" />
-                            <path
-                                d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
-                        </svg>
-                        ویرایش شماره
-                    </button>
-                    <div class="otp-resend">
-                        <button class="otp-resend-btn" id="otpResend"
-                            type="button" disabled>تا ارسال مجدد</button>
-                        <span class="otp-divider"></span>
-                        <span class="otp-timer" id="otpTimer">01:30</span>
+                    <div class="otp-fields" id="otpFields">
+                        <input maxlength="1" inputmode="numeric"
+                            autocomplete="one-time-code" aria-label="رقم ۱">
+                        <input maxlength="1" inputmode="numeric"
+                            aria-label="رقم ۲">
+                        <input maxlength="1" inputmode="numeric"
+                            aria-label="رقم ۳">
+                        <input maxlength="1" inputmode="numeric"
+                            aria-label="رقم ۴">
+                        <input maxlength="1" inputmode="numeric"
+                            aria-label="رقم ۵">
                     </div>
+
+                    <div class="otp-meta">
+                        <button class="otp-edit" type="button" id="otpEdit">
+                            <svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20h9" />
+                                <path
+                                    d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+                            </svg>
+                            ویرایش شماره
+                        </button>
+                        <div class="otp-resend">
+                            <button class="otp-resend-btn" id="otpResend"
+                                type="button" disabled>تا ارسال مجدد</button>
+                            <span class="otp-divider"></span>
+                            <span class="otp-timer" id="otpTimer">01:30</span>
+                        </div>
+                    </div>
+
+                    <button class="otp-submit" id="otpSubmit" type="button"
+                        disabled>تایید و ثبت‌نام</button>
+                    <p class="otp-status" id="otpStatus"></p>
                 </div>
 
-                <button class="otp-submit" id="otpSubmit" type="button"
-                    disabled>تایید و ثبت‌نام</button>
-                <p class="otp-status" id="otpStatus"></p>
+                <!-- فرم اطلاعات کاربر جدید -->
+                <div class="otp-user-form" id="otpUserForm"
+                    style="display: none;">
+                    <h2 class="otp-title">تکمیل اطلاعات</h2>
+                    <p class="otp-desc">لطفا اطلاعات خود را وارد کنید.</p>
+
+                    <form id="userDataForm" class="otp-form">
+                        <div class="form-group">
+                            <input type="text" id="userName" placeholder="نام"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <select id="userGender" required>
+                                <option value>جنسیت را انتخاب کنید</option>
+                                <option value="male">مرد</option>
+                                <option value="female">زن</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="otp-submit">تکمیل
+                            ثبت‌نام</button>
+                        <p class="otp-status" id="formStatus"></p>
+                    </form>
+                </div>
             </div>
         </div>
         <!-- Winner Modal / Drawer -->
