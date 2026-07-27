@@ -1411,17 +1411,22 @@
                     <p class="otp-desc">لطفا کد ارسال شده به شماره موبایل <b
                             id="otpPhone">09360212700</b> را وارد کنید.</p>
 
-                    <div class="otp-fields" id="otpFields">
-                        <input maxlength="1" inputmode="numeric"
-                            autocomplete="one-time-code" aria-label="رقم ۱">
-                        <input maxlength="1" inputmode="numeric"
-                            aria-label="رقم ۲">
-                        <input maxlength="1" inputmode="numeric"
-                            aria-label="رقم ۳">
-                        <input maxlength="1" inputmode="numeric"
-                            aria-label="رقم ۴">
-                        <input maxlength="1" inputmode="numeric"
-                            aria-label="رقم ۵">
+                    <div class="otp-fields-wrapper">
+                        <input type="text"
+                            id="otpRealInput"
+                            maxlength="5"
+                            inputmode="numeric"
+                            pattern="[0-9]*"
+                            autocomplete="one-time-code"
+                            aria-label="کد تایید">
+
+                        yy<div class="otp-boxes" id="otpBoxes">
+                            <span class="otp-box"></span>
+                            <span class="otp-box"></span>
+                            <span class="otp-box"></span>
+                            <span class="otp-box"></span>
+                            <span class="otp-box"></span>
+                        </div>
                     </div>
 
                     <div class="otp-meta">

@@ -4,7 +4,10 @@ function otpMain() {
     const overlay = document.getElementById('otpOverlay');
     const closeBtn = document.getElementById('otpClose');
     const editBtn = document.getElementById('otpEdit');
-    const fields = [...document.querySelectorAll('#otpFields input')];
+    
+    const realInput = document.getElementById('otpRealInput');
+    const boxes = [...document.querySelectorAll('#otpBoxes .otp-box')];
+    
     const submitBtn = document.getElementById('otpSubmit');
     const resendBtn = document.getElementById('otpResend');
     const timerEl = document.getElementById('otpTimer');
@@ -21,11 +24,6 @@ function otpMain() {
     let timerId = null;
     let seconds = 90;
     let isNewUser = true;
-
-    function toFa(str) {
-        const map = { '0': '۰', '1': '۱', '2': '۲', '3': '۳', '4': '۴', '5': '۵', '6': '۶', '7': '۷', '8': '۸', '9': '۹' };
-        return String(str).replace(/[0-9]/g, d => map[d]);
-    }
 
     function formatTime(s) {
         const m = String(Math.floor(s / 60)).padStart(2, '0');
@@ -54,10 +52,42 @@ function otpMain() {
             }
         }, 1000);
     }
+    function updateBoxes() {
+        let val = realInput.value.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+        val = val.replace(/[^0-9]/g, '').slice(0, boxes.length);
+        realInput.value = val;
+
+        boxes.forEach((box, i) => {
+            box.classList.remove('error');
+            if (i < val.length) {
+                box.textContent = val[i];
+                box.classList.add('filled');
+                box.classList.remove('active');
+            } else if (i === val.length) {
+                box.textContent = '';
+                box.classList.remove('filled');
+                box.classList.add('active'); 
+            } else {
+                box.textContent = '';
+                box.classList.remove('filled', 'active');
+            }
+        });
+
+        submitBtn.disabled = val.length !== boxes.length;
+        return val;
+    }
+
+    realInput.addEventListener('input', updateBoxes);
+
+    realInput.addEventListener('focus', () => {
+        updateBoxes();
+    });
 
     function openOtp() {
         phoneLabel.textContent = phoneInput.value.trim() || '—';
-        fields.forEach(f => { f.value = ''; f.classList.remove('error'); });
+        realInput.value = '';
+        updateBoxes();
+        
         statusEl.textContent = '';
         statusEl.classList.remove('ok');
         submitBtn.disabled = true;
@@ -68,7 +98,7 @@ function otpMain() {
         overlay.classList.add('open');
         document.body.style.overflow = 'hidden';
         startTimer();
-        setTimeout(() => fields[0].focus(), 260);
+        setTimeout(() => realInput.focus(), 260);
     }
 
     function closeOtp() {
@@ -104,56 +134,20 @@ function otpMain() {
         if (e.key === 'Escape' && overlay.classList.contains('open')) closeOtp();
     });
 
-    function checkComplete() {
-        const val = fields.map(f => f.value).join('');
-        submitBtn.disabled = val.length !== fields.length;
-        return val;
-    }
-
-    fields.forEach((input, idx) => {
-        input.addEventListener('input', () => {
-            input.value = input.value.replace(/[^0-9۰-۹]/g, '').slice(-1);
-            input.classList.remove('error');
-            if (input.value && idx < fields.length - 1) {
-                fields[idx + 1].focus();
-            }
-            checkComplete();
-        });
-
-        input.addEventListener('keydown', (e) => {
-            if (e.key === 'Backspace' && !input.value && idx > 0) {
-                fields[idx - 1].focus();
-            }
-        });
-
-        input.addEventListener('paste', (e) => {
-            e.preventDefault();
-            const text = (e.clipboardData.getData('text') || '').replace(/[^0-9]/g, '');
-            if (!text) return;
-            text.split('').slice(0, fields.length).forEach((ch, i) => {
-                if (fields[i]) fields[i].value = ch;
-            });
-            const next = Math.min(text.length, fields.length - 1);
-            fields[next].focus();
-            checkComplete();
-        });
-    });
-
     resendBtn.addEventListener('click', () => {
         if (resendBtn.disabled) return;
-        // backend : add lagic
-        fields.forEach(f => { f.value = ''; f.classList.remove('error'); });
+        realInput.value = '';
+        updateBoxes();
         statusEl.textContent = 'کد جدید ارسال شد.';
         statusEl.classList.add('ok');
         submitBtn.disabled = true;
         startTimer();
-        fields[0].focus();
+        realInput.focus();
     });
 
     submitBtn.addEventListener('click', () => {
-        const code = fields.map(f => f.value).join('');
-        // backend: replace with real API check + isNewUser in res
-        if (code.length === fields.length) {
+        const code = realInput.value;
+        if (code.length === boxes.length) {
             statusEl.classList.add('ok');
             statusEl.textContent = 'کد با موفقیت تایید شد.';
             
@@ -165,7 +159,7 @@ function otpMain() {
                 }
             }, 900);
         } else {
-            fields.forEach(f => { if (!f.value) f.classList.add('error'); });
+            boxes.forEach(b => { if (!b.textContent) b.classList.add('error'); });
             statusEl.classList.remove('ok');
             statusEl.textContent = 'لطفا کد را کامل وارد کنید.';
         }
@@ -183,13 +177,6 @@ function otpMain() {
             return;
         }
 
-        const userData = {
-            name,
-            gender,
-            phone: phoneInput.value.trim(),
-            timestamp: new Date().toISOString()
-        };
-
         formStatus.classList.add('ok');
         formStatus.textContent = 'ثبت نام با موفقیت انجام شد.';
 
@@ -197,6 +184,6 @@ function otpMain() {
             closeOtp();
         }, 900);
     });
-};
+}
 
-otpMain()
+otpMain();
