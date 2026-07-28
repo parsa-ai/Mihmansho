@@ -365,6 +365,7 @@
     z-index: 2;
     cursor: pointer;
     caret-color: transparent; 
+    font-size: 16px;
 }
 
 .otp-boxes {
@@ -375,6 +376,7 @@
 }
 
 .otp-box {
+    position: relative;
     width: 56px;
     height: 64px;
     border-radius: 16px;
@@ -387,23 +389,43 @@
     font-weight: 700;
     color: #1c1140;
     background: #fff;
-    box-shadow: var(--field-shadow);
+    box-shadow: var(--field-shadow, 0 2px 8px rgba(0,0,0,0.08));
     transition: box-shadow .15s ease, transform .15s ease;
     font-family: inherit;
     user-select: none;
 }
 
 .otp-box.active {
-    box-shadow: 0 0 0 3px var(--pink-1), var(--field-shadow);
+    box-shadow: 0 0 0 3px var(--pink-1, #e91e63), var(--field-shadow, 0 2px 8px rgba(0,0,0,0.08));
     transform: translateY(-2px);
 }
 
-.otp-box.error {
-    box-shadow: 0 0 0 3px #e5484d, var(--field-shadow);
+.otp-box.active::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 26px;
+    background-color: var(--pink-1, #e91e63);
+    animation: otpBlink 1s infinite;
 }
 
+@keyframes otpBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
 
-@media (max-width:640px) {
+.otp-box.error {
+    box-shadow: 0 0 0 3px #e5484d, var(--field-shadow, 0 2px 8px rgba(0,0,0,0.08));
+    animation: otpShake 0.25s ease-in-out 2;
+}
+
+@keyframes otpShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-4px); }
+    75% { transform: translateX(4px); }
+}
+
+@media (max-width: 640px) {
     .otp-boxes {
         gap: 9px;
     }
@@ -413,5 +435,9 @@
         height: 58px;
         font-size: 22px;
         border-radius: 14px;
+    }
+
+    .otp-box.active::after {
+        height: 22px;
     }
 }
