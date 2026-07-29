@@ -87,26 +87,31 @@ function otpMain() {
 
         const isFocused = document.activeElement === realInput;
 
-        boxes.forEach((box, i) => {
-            box.classList.remove('error');
+        let caret = realInput.selectionStart ?? val.length;
 
-            const isActive = isFocused && (
-                i === val.length || (val.length === boxes.length && i === boxes.length - 1)
-            );
+        if (caret > boxes.length)
+            caret = boxes.length;
+
+        boxes.forEach((box, i) => {
+
+            box.classList.remove("error");
 
             if (i < val.length) {
                 box.textContent = val[i];
-                box.classList.add('filled');
+                box.classList.add("filled");
             } else {
-                box.textContent = '';
-                box.classList.remove('filled');
+                box.textContent = "";
+                box.classList.remove("filled");
             }
 
-            if (isActive) {
-                box.classList.add('active');
-            } else {
-                box.classList.remove('active');
-            }
+            box.classList.toggle(
+                "active",
+                isFocused &&
+                (
+                    i === caret ||
+                    (caret === boxes.length && i === boxes.length - 1)
+                )
+            );
         });
 
         submitBtn.disabled = val.length !== boxes.length;
@@ -124,8 +129,12 @@ function otpMain() {
         });
     }
 
+    realInput.addEventListener("keyup", updateBoxes);
     realInput.addEventListener('input', updateBoxes);
-    realInput.addEventListener('focus', updateBoxes);
+    realInput.addEventListener("focus", () => {
+        requestAnimationFrame(updateBoxes);
+    });
+
 
     realInput.addEventListener('blur', () => {
         boxes.forEach(box => box.classList.remove('active'));
@@ -140,6 +149,13 @@ function otpMain() {
     });
 
     realInput.addEventListener('keydown', (e) => {
+
+        if (["ArrowLeft", "ArrowRight", "Home", "End"].includes(e.key)) {
+            e.preventDefault();
+            return;
+        }
+
+
         if (e.key === 'Enter') {
             e.preventDefault();
             if (realInput.value.length === boxes.length) {
