@@ -6,6 +6,7 @@ function otpMain() {
     const editBtn = document.getElementById('otpEdit');
 
     const realInput = document.getElementById('otpRealInput');
+    const boxesContainer = document.getElementById('otpBoxes');
     const boxes = [...document.querySelectorAll('#otpBoxes .otp-box')];
 
     const submitBtn = document.getElementById('otpSubmit');
@@ -88,17 +89,23 @@ function otpMain() {
 
         boxes.forEach((box, i) => {
             box.classList.remove('error');
+
+            const isActive = isFocused && (
+                i === val.length || (val.length === boxes.length && i === boxes.length - 1)
+            );
+
             if (i < val.length) {
                 box.textContent = val[i];
                 box.classList.add('filled');
-                box.classList.remove('active');
-            } else if (i === val.length && isFocused) {
-                box.textContent = '';
-                box.classList.remove('filled');
-                box.classList.add('active');
             } else {
                 box.textContent = '';
-                box.classList.remove('filled', 'active');
+                box.classList.remove('filled');
+            }
+
+            if (isActive) {
+                box.classList.add('active');
+            } else {
+                box.classList.remove('active');
             }
         });
 
@@ -111,8 +118,13 @@ function otpMain() {
         return val;
     }
 
-    realInput.addEventListener('input', updateBoxes);
+    if (boxesContainer) {
+        boxesContainer.addEventListener('click', () => {
+            realInput.focus();
+        });
+    }
 
+    realInput.addEventListener('input', updateBoxes);
     realInput.addEventListener('focus', updateBoxes);
 
     realInput.addEventListener('blur', () => {
