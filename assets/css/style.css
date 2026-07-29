@@ -151,6 +151,14 @@ body {
     gap: 5rem;
     height: 100%;
 }
+.logo-area{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.logo-typo{
+    width: 100px;
+}
 
 .main-nav {
     height: 100%;
