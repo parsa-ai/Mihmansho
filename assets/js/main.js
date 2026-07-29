@@ -20,7 +20,8 @@ function openWinTab() {
     function closeWinnerModal() {
         overlay.classList.remove('open');
         document.body.style.overflow = '';
-        window.location.href = "/#referral"
+        window.location.replace("#referral")
+        openreferralModal()
     }
 
     function openWinnerModal(prizeNumber, discountCode) {
